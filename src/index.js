@@ -46,8 +46,40 @@ window.addEventListener('load', (event) => {
   // Bind the click event of each element to a function
   document.querySelectorAll('.card').forEach((card) => {
     card.addEventListener('click', () => {
+
+
       // TODO: write some code here
-      console.log(`Card clicked: ${card}`);
+      console.log(`Card clicked: ${card.innerHTML}`);
+      card.classList.toggle('turned');
+      
+     
+
+      memoryGame.pickedCards.push(card);
+     
+      if (memoryGame.pickedCards.length === 2) {
+        // memoryGame.checkIfPair(memoryGame.pickedCards[0], memoryGame.pickedCards[1]);
+      if (memoryGame.checkIfPair(memoryGame.pickedCards[0].innerHTML, memoryGame.pickedCards[1].innerHTML) === false) {
+
+      console.log("try again");
+      
+
+      setTimeout( () => {
+      memoryGame.pickedCards[0].classList.toggle("turned");
+      memoryGame.pickedCards[1].classList.toggle("turned");
+      memoryGame.pickedCards =[];
+    }, 1500)
+
+      } else if (memoryGame.checkIfPair(memoryGame.pickedCards[0].innerHTML, memoryGame.pickedCards[1].innerHTML)  === true) {
+
+        console.log("they're matched");
+        memoryGame.pickedCards =[];
+      }
+    }
+    console.log({pairsClick: memoryGame.pairsClicked})
+    console.log({cardsLength: memoryGame.cards.length})
+    console.log({pairsGuessed: memoryGame.pairsGuessed})
+      memoryGame.checkIfFinished();
+      
     });
   });
 });

@@ -33,6 +33,8 @@ class MemoryGame {
 
   checkIfPair(card1, card2) {
     // ... write your code here
+
+
       if (card1 === card2) {
         this.pairsClicked += 1;
         this.pairsGuessed += 1;
@@ -41,14 +43,17 @@ class MemoryGame {
         this.pairsClicked =+ 1;
         return false;
       }
-   
+
   }
 
   checkIfFinished() {
     // ... write your code here
+
     if ((this.cards.length/2) !== this.pairsGuessed){
+   
       return false;
     } else if ((this.cards.length/2)  === this.pairsGuessed) {
+      console.log("you won the game!!!")
       return true;
     }
 
