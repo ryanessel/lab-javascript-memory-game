@@ -28,7 +28,7 @@ const cards = [
 const memoryGame = new MemoryGame(cards);
 
 // console.log(memoryGame.shuffleCards());
-
+let count = 0; // COUNTER NEEDED TO GATHER THE CLICKS
 window.addEventListener('load', (event) => {
   let html = '';
   memoryGame.cards.forEach((pic) => {
@@ -47,11 +47,31 @@ window.addEventListener('load', (event) => {
   document.querySelectorAll('.card').forEach((card) => {
     card.addEventListener('click', () => {
 
-
+      if (count >= 2) { // this if statment is supposed to disable clicking on cards if the player has clicked 2 cards already
+        count = 0;
+      
+        
+        document.querySelectorAll('.card').forEach(card => {
+          
+      card.disabled = true;
+    });
+     
+          setTimeout(()=>{
+            
+       
+       document.querySelectorAll('.card').forEach(card => {
+      card.disabled = false;
+    });
+          
+          }, 5000)
+        
+      } else { // else for when the count is less than 2
+        count =+ 1;
+        console.log(count);
       // TODO: write some code here
       console.log(`Card clicked: ${card.innerHTML}`);
       card.classList.toggle('turned');
-      
+     
      
 
       memoryGame.pickedCards.push(card);
@@ -75,6 +95,7 @@ window.addEventListener('load', (event) => {
         memoryGame.pickedCards =[];
       }
     }
+  }
     console.log({pairsClick: memoryGame.pairsClicked})
     console.log({cardsLength: memoryGame.cards.length})
     console.log({pairsGuessed: memoryGame.pairsGuessed})
